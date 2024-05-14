@@ -107,6 +107,17 @@ Navigate to:
 
 Have fun, and join the team of contributors!
 
+## Running docker container
+```bash
+docker run -d -p 8080:8080 \
+  -e QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://host.docker.internal/d \
+  -e QUARKUS_DATASOURCE_USERNAME=u \
+  -e QUARKUS_DATASOURCE_PASSWORD=p \
+  ghcr.io/joschne-assessment/crud-app:3720174 \
+  --platform=linux/amd64 
+```
+
+
 ## Running the demo in Kubernetes
 
 This section provides extra information for running both the database and the demo on Kubernetes.
