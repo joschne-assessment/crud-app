@@ -17,7 +17,7 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: deploy-crud-app.yml
-          repo: joschne-assesment/infra
+          repo: joschne-assessment/infra
           token: ${{ secrets.REPO_PAT }}
           inputs: |
             {
@@ -86,7 +86,7 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: deploy-crud-app.yml
-          repo: joschne-assesment/infra
+          repo: joschne-assessment/infra
           token: ${{ secrets.REPO_PAT }}
           inputs: |
             {
