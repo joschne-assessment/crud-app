@@ -45,4 +45,4 @@ jobs:
             -Dquarkus.container-image.registry="ghcr.io" \
             -Dquarkus.container-image.group="joschne-assessment" \
             -Dquarkus.container-image.name="crud-app" \
-            -Dquarkus.container-image.tag="${{ steps.extract_sha.outputs.sha }}""
+            -Dquarkus.container-image.tag="${{ steps.extract_sha.outputs.sha }}"
