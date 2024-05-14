@@ -9,10 +9,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    permissions: write-all
-
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +23,14 @@ jobs:
 
       - name: Test with Maven
         run: bash test.sh
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions: write-all
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -46,3 +52,22 @@ jobs:
             -Dquarkus.container-image.group="joschne-assessment" \
             -Dquarkus.container-image.name="crud-app" \
             -Dquarkus.container-image.tag="${{ steps.extract_sha.outputs.sha }}"
+
+    outputs:
+      version: ${{ steps.extract_sha.outputs.sha }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Trigger deployment
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: "Deploy crud app"
+          repo: joschne-assesment/infra
+          token: ${{ secrets.REPO_PAT }}
+          inputs: |
+            {
+              "app_version": "${{needs.build.outputs.version}}"
+            }
+
