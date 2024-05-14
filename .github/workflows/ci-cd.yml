@@ -10,20 +10,6 @@ on:
 
 jobs:
 
-  deploy1:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger deployment
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: deploy-crud-app.yml
-          repo: joschne-assessment/infra
-          token: ${{ secrets.REPO_PAT }}
-          inputs: |
-            {
-              "app_version": "1"
-            }
-
   test:
     runs-on: ubuntu-latest
     steps:
