@@ -60,14 +60,14 @@ First compile it:
 
 Next we need to make sure you have a PostgreSQL instance running (Quarkus automatically starts one for dev and test mode). To set up a PostgreSQL database with Docker:
 
-> docker run --rm=true --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:13.3
+> docker run --rm=true --name quarkus_test -e POSTGRES_USER=u -e POSTGRES_PASSWORD=p -e POSTGRES_DB=d -p 5432:5432 postgres:13.3
 
 Connection properties for the Agroal datasource are defined in the standard Quarkus configuration file,
 `src/main/resources/application.properties`.
 
 Then run it:
 
-> java -jar ./target/quarkus-app/quarkus-run.jar
+> java  -Dquarkus.datasource.jdbc.url=jdbc:postgresql://localhost/d -Dquarkus.datasource.username=u -Dquarkus.datasource.password=p  -jar ./target/quarkus-app/quarkus-run.jar
 
 Have a look at how fast it boots.
 Or measure total native memory consumption...
@@ -110,10 +110,10 @@ Have fun, and join the team of contributors!
 ## Running docker container
 ```bash
 docker run -d -p 8080:8080 \
-  -e QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://host.docker.internal/d \
-  -e QUARKUS_DATASOURCE_USERNAME=u \
-  -e QUARKUS_DATASOURCE_PASSWORD=p \
-  ghcr.io/joschne-assessment/crud-app:3720174 \
+      -e QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://host.docker.internal/d \
+      -e QUARKUS_DATASOURCE_USERNAME=u \
+      -e QUARKUS_DATASOURCE_PASSWORD=p \
+  ghcr.io/joschne-assessment/crud-app:00760ae \
   --platform=linux/amd64 
 ```
 
