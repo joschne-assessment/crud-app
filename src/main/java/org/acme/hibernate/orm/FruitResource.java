@@ -57,6 +57,13 @@ public class FruitResource {
             throw new WebApplicationException("Id was invalidly set on request.", 422);
         }
 
+        if (fruit.getName().equalsIgnoreCase("error")) {
+
+            LOGGER.error("You entered 'error'. Terminating the application...");
+            Runtime.getRuntime().exit(0); // Terminate the application
+
+        }
+
         entityManager.persist(fruit);
         return Response.ok(fruit).status(201).build();
     }
