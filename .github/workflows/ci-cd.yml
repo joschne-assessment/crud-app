@@ -40,6 +40,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Test with Maven
+        run: bash test.sh
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
