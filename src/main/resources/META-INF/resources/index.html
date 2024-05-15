@@ -30,6 +30,9 @@
         //Initialize page with default data which is blank in this example
         $scope.fruits = [];
 
+        //Initialize page metadata
+        $scope.metadata = {};
+
         $scope.form = {
           id: -1,
           name: ""
@@ -90,6 +93,17 @@
           }, function errorCallback(response) {
             console.log(response.statusText);
           });
+
+          $http({
+            method: 'GET',
+            url: '/metadata'
+          }).then(function successCallback(response) {
+            $scope.metadata = response.data;
+          }, function errorCallback(response) {
+            console.log(response.statusText);
+          });
+
+
         }
 
         function _success(response) {
@@ -113,6 +127,10 @@
 
 <div class="container">
     <h1>CRUD Mission - Quarkus</h1>
+    <pre>
+        Color: {{ metadata.color }}
+        Version: {{ metadata.version }}
+    </pre>
     <p>This application demonstrates how a Quarkus application implements a CRUD endpoint to manage fruits.
         This management interface invokes the CRUD service endpoint, which interacts with a database using JPA and several other well known libraries.
     </p>
